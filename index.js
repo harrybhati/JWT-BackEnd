@@ -42,6 +42,11 @@ const authMiddleware = (req, res, next) => {
   }
 };
 
+app.get("/", (req, res) => {
+  res.send("JWT Backend API is running! Use /signup, /login, /checkAuth endpoints.");
+});
+
+
 // ================= SIGNUP =================
 app.post("/signup", async (req, res) => {
   try {
