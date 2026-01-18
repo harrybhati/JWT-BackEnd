@@ -9,8 +9,8 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const cookieParser = require("cookie-parser");
 
-const connectDb = require("../DB/Config");   // ✅ fixed path (capital C)
-const User = require("../DB/UserSchema");
+const connectDb = require("./DB/Config");   // ✅ fixed path (capital C)
+const User = require("./DB/UserSchema");
 
 const app = express();
 
