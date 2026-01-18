@@ -1,14 +1,22 @@
 const mongoose = require("mongoose");
 
+// Use a global cached object to prevent multiple connections in serverless
 let cached = global.mongoose;
 
-if (!cached) cached = global.mongoose = { conn: null, promise: null };
+if (!cached) {
+  cached = global.mongoose = { conn: null, promise: null };
+}
 
 async function connectDb() {
   if (cached.conn) return cached.conn;
 
   if (!cached.promise) {
-    const opts = { bufferCommands: false, useNewUrlParser: true, useUnifiedTopology: true };
+    const opts = {
+      bufferCommands: false,
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    };
+
     cached.promise = mongoose.connect(process.env.MONGO_URL, opts).then((mongoose) => mongoose);
   }
 

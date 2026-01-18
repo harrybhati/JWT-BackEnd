@@ -9,8 +9,8 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const cookieParser = require("cookie-parser");
 
-const connectDb = require("./DB/Config");
-const User = require("./DB/UserSchema");
+const connectDb = require("../DB/Config");   // ✅ fixed path (capital C)
+const User = require("../DB/UserSchema");
 
 const app = express();
 
@@ -19,12 +19,10 @@ app.use(cors({
   origin: true,          // allow all origins for now; restrict later
   credentials: true,     // required for cookies
 }));
-
 app.use(express.json());
 app.use(cookieParser());
 
 // ================= SERVERLESS-FRIENDLY DB CONNECT =================
-// Connect DB per request, cached inside Config.js
 app.use(async (req, res, next) => {
   try {
     await connectDb();
