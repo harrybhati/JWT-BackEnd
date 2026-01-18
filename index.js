@@ -9,16 +9,20 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const cookieParser = require("cookie-parser");
 
-const connectDb = require("./DB/Config");   // ✅ fixed path (capital C)
+const connectDb = require("./DB/Config");
 const User = require("./DB/UserSchema");
 
 const app = express();
 
 // ================= MIDDLEWARES =================
 app.use(cors({
-  origin: true,          // allow all origins for now; restrict later
-  credentials: true,     // required for cookies
+  origin: [
+    "http://localhost:5173",               // local dev
+    "https://your-frontend.vercel.app"     // deployed frontend
+  ],
+  credentials: true,                       // allow cookies
 }));
+
 app.use(express.json());
 app.use(cookieParser());
 
