@@ -15,14 +15,20 @@ const User = require("./DB/UserSchema");
 const app = express();
 
 // ================= MIDDLEWARES =================
-const cors = require("cors");
+const allowedOrigins = [
+  "http://localhost:5173",                 // local dev
+  "https://jwt-front-end-gilt.vercel.app"  // deployed frontend
+];
 
 app.use(cors({
-  origin: [
-    "http://localhost:5173",                 // local dev
-    "https://jwt-front-end-gilt.vercel.app"  // deployed frontend
-  ],
-  credentials: true, // allow cookies
+  origin: allowedOrigins,
+  credentials: true,
+}));
+
+// Handle preflight requests explicitly
+app.options("*", cors({
+  origin: allowedOrigins,
+  credentials: true,
 }));
 
 app.use(express.json());
