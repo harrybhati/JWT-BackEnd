@@ -15,12 +15,14 @@ const User = require("./DB/UserSchema");
 const app = express();
 
 // ================= MIDDLEWARES =================
+const cors = require("cors");
+
 app.use(cors({
   origin: [
-    "http://localhost:5173",               // local dev
-    "https://your-frontend.vercel.app"     // deployed frontend
+    "http://localhost:5173",                 // local dev
+    "https://jwt-front-end-gilt.vercel.app"  // deployed frontend
   ],
-  credentials: true,                       // allow cookies
+  credentials: true, // allow cookies
 }));
 
 app.use(express.json());
